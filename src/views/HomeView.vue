@@ -1,10 +1,7 @@
-<script setup lang="ts">
-import { Button } from '@/components/ui/button'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <main>
-    <p class="text-7xl font-bold">Home View</p>
-    <Button>Click me</Button>
+  <main class="px-32 py-16">
+    <h2 class="text-3xl font-bold">Checkout</h2>
   </main>
 </template>
