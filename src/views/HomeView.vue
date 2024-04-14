@@ -23,7 +23,9 @@ const formSchema = toTypedSchema(
     email: z.string().email(),
     singleSupplementUpgrade: z.boolean().default(false),
     simCard: z.boolean().default(false),
-    acceptTermsAndConditions: z.boolean().default(false)
+    acceptTermsAndConditions: z
+      .optional(z.boolean())
+      .refine((val) => val === true, { message: 'Please accept the terms and conditions' })
   })
 )
 
@@ -111,7 +113,7 @@ const onSubmit = handleSubmit((values) => {
                   <Checkbox :checked="value" @update:checked="handleChange" />
                 </FormControl>
                 <div class="space-y-6 leading-none">
-                  <FormLabel class="font-bold">Single supplement upgrade</FormLabel>
+                  <FormLabel class="cursor-pointer font-bold">Single supplement upgrade</FormLabel>
                   <FormDescription class="text-md font-bold">Price: USD 40</FormDescription>
                   <FormMessage />
                 </div>
@@ -123,7 +125,7 @@ const onSubmit = handleSubmit((values) => {
                   <Checkbox :checked="value" @update:checked="handleChange" />
                 </FormControl>
                 <div class="space-y-6 leading-none">
-                  <FormLabel class="font-bold">SIM card</FormLabel>
+                  <FormLabel class="cursor-pointer font-bold">SIM card</FormLabel>
                   <FormDescription class="text-md font-bold">Price: USD 40</FormDescription>
                   <FormMessage />
                 </div>
