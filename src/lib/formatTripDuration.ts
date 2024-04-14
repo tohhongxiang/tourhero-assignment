@@ -1,4 +1,4 @@
-import format from 'dateformat'
+import { formatDate } from '@vueuse/core'
 
 const ONE_DAY = 1000 * 60 * 60 * 24
 function calculateEndDate(startDate: Date, durationNights: number) {
@@ -8,10 +8,9 @@ function calculateEndDate(startDate: Date, durationNights: number) {
 export default function formatTripDuration(startDate: Date, durationNights: number) {
   const endDate = calculateEndDate(startDate, durationNights)
 
-  console.log(startDate.getFullYear(), endDate.getFullYear())
   if (endDate.getFullYear() === startDate.getFullYear()) {
-    return `${format(startDate, 'mmm dd')} - ${format(endDate, 'mmm dd, yyyy')}`
+    return `${formatDate(startDate, 'MMM DD')} - ${formatDate(endDate, 'MMM DD, YYYY')}`
   }
 
-  return `${format(startDate, 'mmm dd, yyyy')} - ${format(endDate, 'mmm dd, yyyy')}`
+  return `${formatDate(startDate, 'MMM DD, YYYY')} - ${formatDate(endDate, 'MMM DD, YYYY')}`
 }

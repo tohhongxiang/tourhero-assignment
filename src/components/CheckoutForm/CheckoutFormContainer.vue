@@ -18,6 +18,7 @@ import { Umbrella, CircleCheckBig } from 'lucide-vue-next'
 import { type Trip } from '@/lib/trips'
 import formatTripDuration from '@/lib/formatTripDuration'
 import generateCheckoutSchema from './generateCheckoutSchema'
+import { formatDate } from '@vueuse/core'
 
 const { trip } = defineProps<{ trip: Trip }>()
 
@@ -133,15 +134,31 @@ const totalCost = computed(() => {
             type="checkbox"
             :name="`addOns.${addOn.name}`"
           >
-            <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4">
+            <FormItem
+              class="flex flex-row items-start gap-x-3 space-y-0 py-4"
+              :class="{
+                'pointer-events-none opacity-50': addOn.spotsRemaining === 0
+              }"
+            >
               <FormControl>
-                <Checkbox :checked="value" @update:checked="handleChange" />
+                <Checkbox
+                  :checked="value"
+                  @update:checked="handleChange"
+                  :disabled="addOn.spotsRemaining === 0"
+                />
               </FormControl>
               <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold">{{ addOn.name }}</FormLabel>
-                <FormDescription class="text-md font-bold"
-                  >Price: {{ trip.currency }} {{ addOn.cost }}</FormDescription
+                <FormLabel class="cursor-pointer font-bold"
+                  >{{ addOn.name }}
+                  {{
+                    addOn.timeEnd && addOn.timeStart
+                      ? `(${formatDate(new Date(addOn.timeStart), 'MMM DD, YYYY hh:mm A')} - ${formatDate(new Date(addOn.timeEnd), 'MMM DD, YYYY hh:mm A')})`
+                      : ''
+                  }}</FormLabel
                 >
+                <FormDescription class="text-md font-bold">
+                  Price: {{ trip.currency }} {{ addOn.cost }}
+                </FormDescription>
                 <FormMessage />
               </div>
             </FormItem>

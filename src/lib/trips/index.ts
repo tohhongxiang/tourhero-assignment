@@ -5,7 +5,7 @@ export type Trip = {
   currency: string
   coverImage: string
   country: string
-  startDate: string
+  startDate: string // date string
   durationNights: number
   groupSize: number
   included: string[]
@@ -16,6 +16,9 @@ export type Trip = {
 export type TripAddOn = {
   name: string
   cost: number
+  spotsRemaining?: number
+  timeStart?: string // date string
+  timeEnd?: string // date string
 }
 
 const trips = [
@@ -44,7 +47,28 @@ const trips = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim nulla et risus viverra, nec tincidunt velit gravida. Ut cursus scelerisque leo, facilisis faucibus purus semper non. Sed vestibulum odio venenatis viverra consectetur. Aenean dignissim blandit orci eget luctus. In lorem mi, imperdiet in mi et, placerat ultrices urna. Cras ultricies est in sapien tincidunt, nec molestie nunc placerat. Curabitur mollis imperdiet nulla, ac ultrices nisi. Mauris vulputate turpis luctus volutpat pretium. Maecenas sed egestas purus. Donec eget orci dignissim, varius felis eu, sagittis justo. Nulla et magna tortor. Morbi consequat tortor nec volutpat feugiat. Morbi et urna eu tellus vestibulum congue. Sed egestas ipsum arcu, id vulputate nisi ultrices sed. Mauris non odio sit amet purus tristique semper nec eu risus. Pellentesque in massa vitae eros condimentum auctor.',
     addOns: [
       { name: 'SIM card', cost: 15 },
-      { name: 'Upgrade to first-class', cost: 1500 }
+      { name: 'Single room upgrade', cost: 1500, spotsRemaining: 4 },
+      {
+        name: 'Visit to cultural house',
+        cost: 30,
+        spotsRemaining: 7,
+        timeStart: 'Sep 15, 2024 10:00:00',
+        timeEnd: 'Sep 15, 2024 13:00:00'
+      },
+      {
+        name: 'Visit to museum',
+        cost: 15,
+        spotsRemaining: 3,
+        timeStart: 'Sep 15, 2024 15:00:00',
+        timeEnd: 'Sep 15, 2024 18:00:00'
+      },
+      {
+        name: 'Picturesque lunch',
+        cost: 25,
+        spotsRemaining: 6,
+        timeStart: 'Sep 15, 2024 12:00:00',
+        timeEnd: 'Sep 15, 2024 16:00:00'
+      }
     ]
   },
   {
