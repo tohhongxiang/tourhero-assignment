@@ -42,8 +42,19 @@ const onSubmit = handleSubmit((values) => {
   })
 })
 
+const selectedAddOnsCost = computed(() => {
+  let addOnsCost = 0
+  trip.addOns.forEach((addOn) => {
+    if (values.addOns?.[addOn.name]) {
+      addOnsCost += addOn.cost
+    }
+  })
+
+  return addOnsCost
+})
+
 const totalCost = computed(() => {
-  let currentCost = trip!.cost
+  let currentCost = trip.cost
 
   trip.addOns.forEach((addOn) => {
     if (values.addOns?.[addOn.name]) {
@@ -137,6 +148,24 @@ const totalCost = computed(() => {
           </FormField>
         </div>
       </div>
+      <div class="rounded-md border border-gray-600/10 p-6">
+        <h4 class="mb-4 text-2xl font-semibold text-primary">Price Breakdown</h4>
+        <ul class="flex flex-col gap-4">
+          <li class="flex justify-between">
+            <p>Base package</p>
+            <p>{{ trip.currency }} {{ trip.cost }}</p>
+          </li>
+          <li v-if="selectedAddOnsCost > 0" class="flex justify-between">
+            <p>Add-ons</p>
+            <p>{{ trip.currency }} {{ selectedAddOnsCost }}</p>
+          </li>
+          <li class="border-t border-gray-600/10"></li>
+          <li class="flex justify-between font-bold">
+            <p>Total due</p>
+            <p class="text-lg">{{ trip.currency }} {{ totalCost }}</p>
+          </li>
+        </ul>
+      </div>
       <FormField v-slot="{ value, handleChange }" type="checkbox" name="acceptTermsAndConditions">
         <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4">
           <FormControl>
@@ -174,8 +203,8 @@ const totalCost = computed(() => {
 
           <div class="my-6 border-b border-gray-600/10" />
 
-          <p class="mt-2 text-xs font-bold uppercase text-muted-foreground">Current Payment</p>
-          <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ totalCost }}</p>
+          <p class="mt-2 text-xs font-bold uppercase text-muted-foreground">Base Package</p>
+          <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ trip.cost }}</p>
         </div>
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
