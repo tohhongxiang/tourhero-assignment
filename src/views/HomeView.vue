@@ -44,13 +44,13 @@ const onSubmit = handleSubmit((values) => {
 </script>
 
 <template>
-  <main class="px-32 py-16">
+  <main class="px-4 py-16 sm:px-8 md:px-16 xl:px-32">
     <h2 class="mb-8 text-2xl font-bold">Checkout</h2>
-    <form class="flex w-full flex-row gap-4" @submit.prevent="onSubmit">
+    <form class="flex w-full flex-col-reverse gap-4 sm:flex-row" @submit.prevent="onSubmit">
       <div class="flex w-full flex-col gap-4">
         <div class="rounded-md border border-gray-600/10 p-6">
           <h4 class="mb-4 text-2xl font-semibold text-primary">Guest details</h4>
-          <div class="flex flex-row justify-between gap-4">
+          <div class="flex flex-col justify-between gap-4 lg:flex-row">
             <FormField v-slot="{ componentField }" name="name">
               <FormItem class="flex w-full flex-col justify-end">
                 <div class="h-full">
@@ -152,7 +152,7 @@ const onSubmit = handleSubmit((values) => {
         </FormField>
         <Button type="submit" class="ml-auto bg-[#D50037]">Confirm and pay</Button>
       </div>
-      <div class="flex w-1/3 flex-col gap-4">
+      <div class="flex flex-col gap-4 sm:w-96 lg:w-1/3">
         <div class="overflow-hidden rounded-md border border-gray-600/10">
           <img
             src="https://plus.unsplash.com/premium_photo-1673280731432-9cc09eb20fed?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
