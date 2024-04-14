@@ -18,14 +18,15 @@ export default function generateCheckoutSchema(trip: Trip) {
       .object(
         Object.fromEntries(trip.addOns.map((addOn) => [addOn.name, z.boolean().default(false)]))
       )
+      .optional()
       .superRefine((vals, ctx) => {
         for (let i = 0; i < addOnsWithTimeSorted.length - 1; i++) {
           const firstAddOn = addOnsWithTimeSorted[i]
           const secondAddOn = addOnsWithTimeSorted[i + 1]
 
           if (
-            vals[firstAddOn.name] &&
-            vals[secondAddOn.name] &&
+            vals?.[firstAddOn.name] &&
+            vals?.[secondAddOn.name] &&
             new Date(firstAddOn.timeEnd!) > new Date(secondAddOn.timeStart!)
           ) {
             ctx.addIssue({
