@@ -51,7 +51,7 @@ const trips = [
       {
         name: 'Visit to cultural house',
         cost: 30,
-        spotsRemaining: 7,
+        spotsRemaining: 0,
         timeStart: 'Sep 15, 2024 10:00:00',
         timeEnd: 'Sep 15, 2024 13:00:00'
       },

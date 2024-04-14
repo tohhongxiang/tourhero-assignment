@@ -154,7 +154,8 @@ const totalCost = computed(() => {
                     addOn.timeEnd && addOn.timeStart
                       ? `(${formatDate(new Date(addOn.timeStart), 'MMM DD, YYYY hh:mm A')} - ${formatDate(new Date(addOn.timeEnd), 'MMM DD, YYYY hh:mm A')})`
                       : ''
-                  }}</FormLabel
+                  }}
+                  {{ addOn.spotsRemaining === 0 ? '[No slots remaining]' : '' }}</FormLabel
                 >
                 <FormDescription class="text-md font-bold">
                   Price: {{ trip.currency }} {{ addOn.cost }}
