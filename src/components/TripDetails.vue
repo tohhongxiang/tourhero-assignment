@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
+import formatTripDuration from '@/lib/formatTripDuration'
 import { getTrip } from '@/lib/trips'
 import { CircleCheckBig, CircleDollarSign } from 'lucide-vue-next'
+import { computed } from 'vue'
 
 const props = defineProps<{ tripId: string }>()
 const tripDetails = await getTrip(props.tripId)
+const tripDuration = computed(() =>
+  tripDetails ? formatTripDuration(new Date(tripDetails.startDate), tripDetails.durationNights) : ''
+)
 </script>
 
 <template>
@@ -23,8 +28,8 @@ const tripDetails = await getTrip(props.tripId)
           <p>{{ tripDetails.durationNights + 1 }} days, {{ tripDetails.durationNights }} nights</p>
         </div>
         <div>
-          <p class="text-sm font-semibold uppercase text-muted-foreground">Start Date</p>
-          <p>{{ tripDetails.startDate }}</p>
+          <p class="text-sm font-semibold uppercase text-muted-foreground">Date</p>
+          <p>{{ tripDuration }}</p>
         </div>
         <div>
           <p class="text-sm font-semibold uppercase text-muted-foreground">Country</p>
