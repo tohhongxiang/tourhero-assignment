@@ -29,27 +29,27 @@
         <ul class="flex flex-row flex-wrap items-center gap-8">
           <li>
             <a href="#" class="cursor-pointer">
-              <img src="@/components/icons/Instagram.svg" width="24" height="24" />
+              <img src="@/assets/icons/Instagram.svg" width="24" height="24" />
             </a>
           </li>
           <li>
             <a href="#" class="cursor-pointer">
-              <img src="@/components/icons/Facebook.svg" width="24" height="24" />
+              <img src="@/assets/icons/Facebook.svg" width="24" height="24" />
             </a>
           </li>
           <li>
             <a href="#" class="cursor-pointer">
-              <img src="@/components/icons/LinkedIn.svg" width="24" height="24" />
+              <img src="@/assets/icons/LinkedIn.svg" width="24" height="24" />
             </a>
           </li>
           <li>
             <a href="#" class="cursor-pointer">
-              <img src="@/components/icons/X.svg" width="24" height="24" />
+              <img src="@/assets/icons/X.svg" width="24" height="24" />
             </a>
           </li>
           <li>
             <a href="#" class="cursor-pointer">
-              <img src="@/components/icons/Youtube.svg" width="24" height="24" />
+              <img src="@/assets/icons/Youtube.svg" width="24" height="24" />
             </a>
           </li>
         </ul>

@@ -40,13 +40,13 @@ const tripDuration = computed(() =>
           <p>{{ tripDetails.groupSize }}</p>
         </div>
       </div>
-      <div class="w-full rounded-md border border-gray-600/10 p-8 md:w-1/3">
-        <div class="mb-4 flex items-center gap-2 md:mb-8">
-          <CircleDollarSign />
-          <h2 class="text-2xl font-bold">Tour Price</h2>
+      <div class="w-full rounded-md border border-gray-600/10 p-6 md:w-1/3">
+        <div class="mb-4 flex items-center gap-2">
+          <CircleDollarSign class="stroke-1 text-primary" />
+          <h2 class="text-2xl font-semibold text-primary">Tour Price</h2>
         </div>
         <div class="flex flex-col items-center justify-center gap-4">
-          <p class="text-2xl font-bold">
+          <p class="text-3xl font-bold text-primary">
             {{ tripDetails.currency }} {{ tripDetails.cost }}
             <span class="text-lg font-semibold text-muted-foreground">/ person</span>
           </p>
@@ -64,7 +64,7 @@ const tripDuration = computed(() =>
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
-          <img src="@/components/icons/PaperWithCheck.svg" />
+          <img src="@/assets/icons/PaperWithCheck.svg" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">

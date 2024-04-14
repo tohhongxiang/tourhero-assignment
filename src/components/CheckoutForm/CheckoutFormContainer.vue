@@ -14,7 +14,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Umbrella, CircleCheckBig } from 'lucide-vue-next'
+import { Umbrella, CircleCheckBig, LockIcon } from 'lucide-vue-next'
 import { type Trip } from '@/lib/trips'
 import formatTripDuration from '@/lib/formatTripDuration'
 import generateCheckoutSchema from './generateCheckoutSchema'
@@ -203,7 +203,10 @@ const totalCost = computed(() => {
           </div>
         </FormItem>
       </FormField>
-      <Button type="submit" class="ml-auto bg-[#D50037]">Confirm and pay</Button>
+      <Button type="submit" class="ml-auto flex items-center gap-2 bg-[#D50037] hover:bg-[#da4050]">
+        <LockIcon class="h-5 w-5 stroke-1" />
+        <span>Confirm and pay</span>
+      </Button>
     </div>
     <div class="flex flex-col gap-4 sm:w-96 lg:w-1/3">
       <div class="overflow-hidden rounded-md border border-gray-600/10">
@@ -232,7 +235,7 @@ const totalCost = computed(() => {
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
-          <img src="@/components/icons/PaperWithCheck.svg" />
+          <img src="@/assets/icons/PaperWithCheck.svg" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">
