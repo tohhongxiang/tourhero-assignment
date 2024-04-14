@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 import { getTrip } from '@/lib/trips'
-import { CircleDollarSign } from 'lucide-vue-next'
+import { CircleCheckBig, CircleDollarSign } from 'lucide-vue-next'
 
 const props = defineProps<{ tripId: string }>()
 const tripDetails = await getTrip(props.tripId)
@@ -51,6 +51,22 @@ const tripDetails = await getTrip(props.tripId)
             >
           </Button>
         </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-8 md:flex-row">
+      <div class="w-full rounded-md border border-gray-600/10 p-6">
+        <p class="font-semibold">{{ tripDetails.description }}</p>
+      </div>
+      <div class="rounded-md border border-gray-600/10 p-6">
+        <div class="mb-4 flex flex-row items-center gap-2">
+          <img src="@/components/icons/PaperWithCheck.svg" />
+          <h4 class="text-2xl font-semibold text-primary">Included</h4>
+        </div>
+        <ul class="flex flex-col gap-4">
+          <li v-for="(item, index) in tripDetails.included" :key="index" class="flex gap-2">
+            <CircleCheckBig class="shrink-0 stroke-green-800" />{{ item }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
