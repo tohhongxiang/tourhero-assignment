@@ -22,12 +22,18 @@ const router = createRouter({
     {
       path: '/trips/:tripId',
       name: 'specific-trip',
-      component: TripView
-    },
-    {
-      path: '/checkout',
-      name: 'checkout',
-      component: CheckoutView
+      children: [
+        {
+          path: '',
+          name: 'specific-trip-details',
+          component: TripView
+        },
+        {
+          path: 'checkout',
+          name: 'specific-trip-checkout',
+          component: CheckoutView
+        }
+      ]
     }
   ]
 })

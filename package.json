@@ -23,6 +23,7 @@
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dateformat": "^5.0.3",
     "lucide-vue-next": "^0.368.0",
     "pinia": "^2.1.7",
     "radix-vue": "^1.7.0",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/dateformat": "^5.0.2",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
