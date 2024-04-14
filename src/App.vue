@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue'
 import Toaster from '@/components/ui/toast/Toaster.vue'
+import PageFooter from '@/components/PageFooter.vue'
 </script>
 
 <template>
@@ -10,5 +11,6 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
   </header>
 
   <RouterView />
+  <PageFooter />
   <Toaster />
 </template>
