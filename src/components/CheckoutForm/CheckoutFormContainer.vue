@@ -216,13 +216,18 @@ const totalCost = computed(() => {
           <p class="text-lg font-semibold leading-tight">
             {{ trip.name }}
           </p>
-          <p class="mt-2 text-sm font-bold uppercase text-muted-foreground">Travel Dates</p>
+          <p class="mt-4 text-sm font-bold uppercase text-muted-foreground">Travel Dates</p>
           <p class="font-semibold">{{ tripDuration }}</p>
+
+          <div v-if="selectedAddOnsCost > 0">
+            <p class="mt-4 text-sm font-bold uppercase text-muted-foreground">Add-on price</p>
+            <p class="font-semibold">{{ trip.currency }} {{ selectedAddOnsCost }}</p>
+          </div>
 
           <div class="my-6 border-b border-gray-600/10" />
 
-          <p class="mt-2 text-xs font-bold uppercase text-muted-foreground">Base Package</p>
-          <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ trip.cost }}</p>
+          <p class="mt-4 text-xs font-bold uppercase text-muted-foreground">Current Payment</p>
+          <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ totalCost }}</p>
         </div>
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
