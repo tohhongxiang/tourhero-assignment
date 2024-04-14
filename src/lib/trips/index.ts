@@ -10,6 +10,12 @@ export type Trip = {
   groupSize: number
   included: string[]
   description: string
+  addOns: TripAddOn[]
+}
+
+export type TripAddOn = {
+  name: string
+  cost: number
 }
 
 const trips = [
@@ -35,7 +41,11 @@ const trips = [
       '24/7 guest support'
     ],
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim nulla et risus viverra, nec tincidunt velit gravida. Ut cursus scelerisque leo, facilisis faucibus purus semper non. Sed vestibulum odio venenatis viverra consectetur. Aenean dignissim blandit orci eget luctus. In lorem mi, imperdiet in mi et, placerat ultrices urna. Cras ultricies est in sapien tincidunt, nec molestie nunc placerat. Curabitur mollis imperdiet nulla, ac ultrices nisi. Mauris vulputate turpis luctus volutpat pretium. Maecenas sed egestas purus. Donec eget orci dignissim, varius felis eu, sagittis justo. Nulla et magna tortor. Morbi consequat tortor nec volutpat feugiat. Morbi et urna eu tellus vestibulum congue. Sed egestas ipsum arcu, id vulputate nisi ultrices sed. Mauris non odio sit amet purus tristique semper nec eu risus. Pellentesque in massa vitae eros condimentum auctor.'
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim nulla et risus viverra, nec tincidunt velit gravida. Ut cursus scelerisque leo, facilisis faucibus purus semper non. Sed vestibulum odio venenatis viverra consectetur. Aenean dignissim blandit orci eget luctus. In lorem mi, imperdiet in mi et, placerat ultrices urna. Cras ultricies est in sapien tincidunt, nec molestie nunc placerat. Curabitur mollis imperdiet nulla, ac ultrices nisi. Mauris vulputate turpis luctus volutpat pretium. Maecenas sed egestas purus. Donec eget orci dignissim, varius felis eu, sagittis justo. Nulla et magna tortor. Morbi consequat tortor nec volutpat feugiat. Morbi et urna eu tellus vestibulum congue. Sed egestas ipsum arcu, id vulputate nisi ultrices sed. Mauris non odio sit amet purus tristique semper nec eu risus. Pellentesque in massa vitae eros condimentum auctor.',
+    addOns: [
+      { name: 'SIM card', cost: 15 },
+      { name: 'Upgrade to first-class', cost: 1500 }
+    ]
   },
   {
     id: 'malaysia',
@@ -59,7 +69,8 @@ const trips = [
       '24/7 guest support'
     ],
     description:
-      'Praesent iaculis sagittis libero, at ultricies felis pharetra imperdiet. Duis finibus, erat eget ultricies porta, nisl dui tempus lorem, eget vulputate lorem nisi vel risus. Morbi at lorem vel purus pretium semper. Donec pretium, quam eget tempor vehicula, sapien erat consequat ipsum, sit amet pharetra nibh purus nec dui. Praesent id justo libero. Nunc tortor dolor, dignissim sed volutpat eu, faucibus at sapien. Etiam eget est volutpat, commodo elit id, laoreet arcu. Maecenas ac luctus mi. Etiam condimentum ante a malesuada scelerisque. Nulla facilisi. Proin pellentesque, diam sed bibendum rhoncus, turpis turpis lacinia leo, vel sollicitudin lectus velit nec lacus. In tempus maximus mauris, a fermentum augue auctor ut. Morbi nec ultrices lorem.'
+      'Praesent iaculis sagittis libero, at ultricies felis pharetra imperdiet. Duis finibus, erat eget ultricies porta, nisl dui tempus lorem, eget vulputate lorem nisi vel risus. Morbi at lorem vel purus pretium semper. Donec pretium, quam eget tempor vehicula, sapien erat consequat ipsum, sit amet pharetra nibh purus nec dui. Praesent id justo libero. Nunc tortor dolor, dignissim sed volutpat eu, faucibus at sapien. Etiam eget est volutpat, commodo elit id, laoreet arcu. Maecenas ac luctus mi. Etiam condimentum ante a malesuada scelerisque. Nulla facilisi. Proin pellentesque, diam sed bibendum rhoncus, turpis turpis lacinia leo, vel sollicitudin lectus velit nec lacus. In tempus maximus mauris, a fermentum augue auctor ut. Morbi nec ultrices lorem.',
+    addOns: []
   },
   {
     id: 'japan',
@@ -81,7 +92,8 @@ const trips = [
       '24/7 guest support'
     ],
     description:
-      'Duis faucibus tempor dolor, nec blandit tortor ullamcorper et. Aliquam erat volutpat. Duis lacinia neque at ornare molestie. Morbi dictum sem et sollicitudin tincidunt. Praesent id libero justo. In non auctor libero. Etiam varius lorem enim, a eleifend turpis tristique non. Cras tristique, justo fermentum mattis vulputate, elit sapien placerat felis, et euismod magna tellus vitae ipsum. Quisque nec fringilla purus, sit amet viverra turpis. Fusce dictum pellentesque scelerisque. Vivamus dignissim pharetra enim eu rhoncus. Phasellus tincidunt et velit quis ultrices. Fusce in magna eu odio cursus pulvinar at eu massa. Morbi finibus imperdiet quam, non viverra quam vestibulum vel.'
+      'Duis faucibus tempor dolor, nec blandit tortor ullamcorper et. Aliquam erat volutpat. Duis lacinia neque at ornare molestie. Morbi dictum sem et sollicitudin tincidunt. Praesent id libero justo. In non auctor libero. Etiam varius lorem enim, a eleifend turpis tristique non. Cras tristique, justo fermentum mattis vulputate, elit sapien placerat felis, et euismod magna tellus vitae ipsum. Quisque nec fringilla purus, sit amet viverra turpis. Fusce dictum pellentesque scelerisque. Vivamus dignissim pharetra enim eu rhoncus. Phasellus tincidunt et velit quis ultrices. Fusce in magna eu odio cursus pulvinar at eu massa. Morbi finibus imperdiet quam, non viverra quam vestibulum vel.',
+    addOns: []
   },
   {
     id: 'norway',
@@ -103,7 +115,8 @@ const trips = [
       '24/7 guest support'
     ],
     description:
-      'Aenean sem sapien, lacinia id dolor et, condimentum ullamcorper diam. Sed molestie quam ante, ac egestas lorem scelerisque eu. Donec lobortis dapibus dolor, quis fringilla est venenatis eu. Phasellus mi arcu, elementum ut viverra sit amet, lacinia vel nunc. Donec porta diam at pulvinar efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec aliquam consequat ultricies. Etiam bibendum libero purus, quis condimentum augue volutpat sed. Nunc tincidunt mi ac metus faucibus, vitae tristique tellus pellentesque. Suspendisse vitae orci tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris malesuada tortor et quam feugiat placerat. Suspendisse in fringilla ipsum. Phasellus mi lectus, convallis sed sapien et, fermentum porttitor turpis. Fusce interdum porttitor justo, ac lobortis purus. Praesent feugiat luctus ex ac elementum.'
+      'Aenean sem sapien, lacinia id dolor et, condimentum ullamcorper diam. Sed molestie quam ante, ac egestas lorem scelerisque eu. Donec lobortis dapibus dolor, quis fringilla est venenatis eu. Phasellus mi arcu, elementum ut viverra sit amet, lacinia vel nunc. Donec porta diam at pulvinar efficitur. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec aliquam consequat ultricies. Etiam bibendum libero purus, quis condimentum augue volutpat sed. Nunc tincidunt mi ac metus faucibus, vitae tristique tellus pellentesque. Suspendisse vitae orci tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris malesuada tortor et quam feugiat placerat. Suspendisse in fringilla ipsum. Phasellus mi lectus, convallis sed sapien et, fermentum porttitor turpis. Fusce interdum porttitor justo, ac lobortis purus. Praesent feugiat luctus ex ac elementum.',
+    addOns: [{ name: 'Ski trip in Fjellheisen', cost: 800 }]
   }
 ]
 

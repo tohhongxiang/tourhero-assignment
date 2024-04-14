@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, h } from 'vue'
-import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { toast } from '@/components/ui/toast'
@@ -16,30 +15,19 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Umbrella, CircleCheckBig } from 'lucide-vue-next'
-import { getTrip } from '@/lib/trips'
+import { type Trip } from '@/lib/trips'
 import formatTripDuration from '@/lib/formatTripDuration'
+import generateCheckoutSchema from './generateCheckoutSchema'
 
-const props = defineProps<{ tripId: string }>()
-const tripDetails = await getTrip(props.tripId)
+const { trip } = defineProps<{ trip: Trip }>()
 
 const tripDuration = computed(() =>
-  tripDetails ? formatTripDuration(new Date(tripDetails.startDate), tripDetails.durationNights) : ''
+  formatTripDuration(new Date(trip.startDate), trip.durationNights)
 )
 
-const formSchema = toTypedSchema(
-  z.object({
-    name: z.string(),
-    lastName: z.string(),
-    email: z.string().email(),
-    singleSupplementUpgrade: z.boolean().default(false),
-    simCard: z.boolean().default(false),
-    acceptTermsAndConditions: z
-      .optional(z.boolean())
-      .refine((val) => val === true, { message: 'Please accept the terms and conditions' })
-  })
-)
+const formSchema = toTypedSchema(generateCheckoutSchema(trip))
 
-const { handleSubmit } = useForm({
+const { handleSubmit, values } = useForm({
   validationSchema: formSchema
 })
 
@@ -53,12 +41,22 @@ const onSubmit = handleSubmit((values) => {
     )
   })
 })
+
+const totalCost = computed(() => {
+  let currentCost = trip!.cost
+
+  trip.addOns.forEach((addOn) => {
+    if (values.addOns?.[addOn.name]) {
+      currentCost += addOn.cost
+    }
+  })
+  return currentCost
+})
 </script>
 
 <template>
   <h2 class="mb-8 text-2xl font-bold">Checkout</h2>
-  <div v-if="!tripDetails"></div>
-  <form v-else class="flex w-full flex-col-reverse gap-4 sm:flex-row" @submit.prevent="onSubmit">
+  <form class="flex w-full flex-col-reverse gap-4 sm:flex-row" @submit.prevent="onSubmit">
     <div class="flex w-full flex-col gap-4">
       <div class="rounded-md border border-gray-600/10 p-6">
         <h4 class="mb-4 text-2xl font-semibold text-primary">Guest details</h4>
@@ -111,32 +109,28 @@ const onSubmit = handleSubmit((values) => {
         </div>
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
-        <h4 class="text-2xl font-semibold text-primary">Available add-on</h4>
+        <h4 class="text-2xl font-semibold text-primary">Available add-on(s)</h4>
         <div class="flex flex-col gap-4">
+          <div v-if="trip.addOns.length === 0">
+            <p class="mt-2 text-xl font-semibold text-muted-foreground">No add-ons available</p>
+          </div>
           <FormField
+            v-else
+            v-for="addOn in trip.addOns"
+            :key="addOn.name"
             v-slot="{ value, handleChange }"
             type="checkbox"
-            name="singleSupplementUpgrade"
+            :name="`addOns.${addOn.name}`"
           >
             <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4">
               <FormControl>
                 <Checkbox :checked="value" @update:checked="handleChange" />
               </FormControl>
               <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold">Single supplement upgrade</FormLabel>
-                <FormDescription class="text-md font-bold">Price: USD 40</FormDescription>
-                <FormMessage />
-              </div>
-            </FormItem>
-          </FormField>
-          <FormField v-slot="{ value, handleChange }" type="checkbox" name="simCard">
-            <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4">
-              <FormControl>
-                <Checkbox :checked="value" @update:checked="handleChange" />
-              </FormControl>
-              <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold">SIM card</FormLabel>
-                <FormDescription class="text-md font-bold">Price: USD 40</FormDescription>
+                <FormLabel class="cursor-pointer font-bold">{{ addOn.name }}</FormLabel>
+                <FormDescription class="text-md font-bold"
+                  >Price: {{ trip.currency }} {{ addOn.cost }}</FormDescription
+                >
                 <FormMessage />
               </div>
             </FormItem>
@@ -166,14 +160,14 @@ const onSubmit = handleSubmit((values) => {
     </div>
     <div class="flex flex-col gap-4 sm:w-96 lg:w-1/3">
       <div class="overflow-hidden rounded-md border border-gray-600/10">
-        <img :src="tripDetails.coverImage" />
+        <img :src="trip.coverImage" />
         <div class="p-6">
           <h4 class="mb-6 text-2xl font-semibold text-primary">Summary</h4>
           <p class="text-sm font-bold uppercase text-muted-foreground">
-            {{ tripDetails.durationNights + 1 }} days, {{ tripDetails.durationNights }} nights
+            {{ trip.durationNights + 1 }} days, {{ trip.durationNights }} nights
           </p>
           <p class="text-lg font-semibold leading-tight">
-            {{ tripDetails.name }}
+            {{ trip.name }}
           </p>
           <p class="mt-2 text-sm font-bold uppercase text-muted-foreground">Travel Dates</p>
           <p class="font-semibold">{{ tripDuration }}</p>
@@ -181,9 +175,7 @@ const onSubmit = handleSubmit((values) => {
           <div class="my-6 border-b border-gray-600/10" />
 
           <p class="mt-2 text-xs font-bold uppercase text-muted-foreground">Current Payment</p>
-          <p class="text-4xl font-bold text-primary">
-            {{ tripDetails.currency }} {{ tripDetails.cost }}
-          </p>
+          <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ totalCost }}</p>
         </div>
       </div>
       <div class="rounded-md border border-gray-600/10 p-6">
@@ -192,7 +184,7 @@ const onSubmit = handleSubmit((values) => {
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">
-          <li v-for="(item, index) in tripDetails.included" :key="index" class="flex gap-2">
+          <li v-for="(item, index) in trip.included" :key="index" class="flex gap-2">
             <CircleCheckBig class="shrink-0 stroke-green-800" />{{ item }}
           </li>
         </ul>

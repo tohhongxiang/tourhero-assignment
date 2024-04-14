@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CheckoutForm from '@/components/CheckoutForm.vue'
-import type LoadingIndicatorVue from '@/components/LoadingIndicator.vue'
+import CheckoutForm from '@/components/CheckoutForm/index.vue'
+import type LoadingIndicator from '@/components/LoadingIndicator.vue'
 import { useRoute } from 'vue-router'
 
 const { params } = useRoute()
@@ -11,7 +11,7 @@ const { params } = useRoute()
     <Suspense>
       <CheckoutForm :trip-id="params.tripId as string" />
       <template #fallback>
-        <LoadingIndicatorVue />
+        <LoadingIndicator />
       </template>
     </Suspense>
   </main>
