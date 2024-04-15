@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Trip } from '@/lib/trips'
+import type { Trip } from '@/lib/api/trips'
 
 const { trip } = defineProps<{ trip: Trip }>()
 </script>

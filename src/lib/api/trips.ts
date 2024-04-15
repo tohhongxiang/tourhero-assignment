@@ -151,3 +151,10 @@ export async function getAllTrips() {
 export async function getTrip(tripId: string) {
   return Promise.resolve(trips.find((trip) => trip.id === tripId))
 }
+
+export async function bookTrip(data: any) {
+  await new Promise((r) => setTimeout(r, 2000))
+  console.log('Submitted', data)
+
+  return { success: true }
+}

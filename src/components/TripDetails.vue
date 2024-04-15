@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
 import formatTripDuration from '@/lib/formatTripDuration'
-import { getTrip } from '@/lib/trips'
+import { getTrip } from '@/lib/api/trips'
 import { CircleCheckBig, CircleDollarSign } from 'lucide-vue-next'
 import { computed } from 'vue'
 
@@ -20,9 +20,7 @@ const tripDuration = computed(() =>
     <h1 class="text-4xl font-bold">{{ tripDetails.name }}</h1>
     <img :src="tripDetails.coverImage" />
     <div class="flex flex-col gap-8 md:flex-row">
-      <div
-        class="grid w-full grid-cols-1 gap-4 rounded-md border border-gray-600/10 p-8 sm:grid-cols-2 md:grid-cols-3"
-      >
+      <div class="grid w-full grid-cols-1 gap-4 rounded-md border border-gray-600/10 p-8 sm:grid-cols-2 md:grid-cols-3">
         <div>
           <p class="text-sm font-semibold uppercase text-muted-foreground">Duration</p>
           <p>{{ tripDetails.durationNights + 1 }} days, {{ tripDetails.durationNights }} nights</p>
@@ -51,9 +49,7 @@ const tripDuration = computed(() =>
             <span class="text-lg font-semibold text-muted-foreground">/ person</span>
           </p>
           <Button as-child>
-            <RouterLink :to="`/trips/${props.tripId}/checkout`" class="bg-[#d50037]"
-              >Reserve your spot!</RouterLink
-            >
+            <RouterLink :to="`/trips/${props.tripId}/checkout`" class="bg-[#d50037]">Reserve your spot!</RouterLink>
           </Button>
         </div>
       </div>

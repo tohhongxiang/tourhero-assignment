@@ -1,4 +1,4 @@
-import type { Trip } from '../../lib/trips'
+import type { Trip } from '../../lib/api/trips'
 import { z } from 'zod'
 
 export default function generateCheckoutSchema(trip: Trip) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getTrip } from '@/lib/trips'
+import { getTrip } from '@/lib/api/trips'
 import CheckoutFormContainer from './CheckoutFormContainer.vue'
 
 const props = defineProps<{ tripId: string }>()

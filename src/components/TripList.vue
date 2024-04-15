@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getAllTrips } from '@/lib/trips'
+import { getAllTrips } from '@/lib/api/trips'
 import TripPreviewCard from './TripPreviewCard.vue'
 
 const trips = await getAllTrips()
