@@ -25,7 +25,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
+  AlertDialogTitle
 } from '@/components/ui/alert-dialog'
 
 const { trip } = defineProps<{ trip: Trip }>()
@@ -44,17 +44,17 @@ const isSubmitting = ref(false)
 const isSuccess = ref(false)
 
 const onSubmit = handleSubmit(async (values) => {
-  isSubmitting.value = true;
+  isSubmitting.value = true
 
   const response = await bookTrip(values)
 
   if (response.success) {
     isSuccess.value = true
   } else {
-    console.error("An error has occurred in submitting the form")
+    console.error('An error has occurred in submitting the form')
   }
 
-  isSubmitting.value = false;
+  isSubmitting.value = false
 })
 
 const selectedAddOnsCost = computed(() => {
@@ -78,7 +78,6 @@ const totalCost = computed(() => {
   })
   return currentCost
 })
-
 </script>
 
 <template>
@@ -91,8 +90,11 @@ const totalCost = computed(() => {
           <FormField v-slot="{ componentField }" name="name">
             <FormItem class="flex w-full flex-col justify-end">
               <div class="h-full">
-                <FormLabel class="text-xs font-bold uppercase text-muted-foreground">Name</FormLabel>
-                <FormDescription class="mt-0 text-xs font-bold text-muted-foreground">(as per travel document)
+                <FormLabel class="text-xs font-bold uppercase text-muted-foreground"
+                  >Name</FormLabel
+                >
+                <FormDescription class="mt-0 text-xs font-bold text-muted-foreground"
+                  >(as per travel document)
                 </FormDescription>
                 <FormMessage />
               </div>
@@ -104,9 +106,11 @@ const totalCost = computed(() => {
           <FormField v-slot="{ componentField }" name="lastName">
             <FormItem class="flex w-full flex-col justify-end">
               <div class="h-full">
-                <FormLabel class="text-xs font-bold uppercase text-muted-foreground">Last Name
+                <FormLabel class="text-xs font-bold uppercase text-muted-foreground"
+                  >Last Name
                 </FormLabel>
-                <FormDescription class="mt-0 text-xs font-bold text-muted-foreground">(as per travel document)
+                <FormDescription class="mt-0 text-xs font-bold text-muted-foreground"
+                  >(as per travel document)
                 </FormDescription>
                 <FormMessage />
               </div>
@@ -118,7 +122,9 @@ const totalCost = computed(() => {
           <FormField v-slot="{ componentField }" name="email">
             <FormItem class="flex w-full flex-col justify-end">
               <div class="h-full">
-                <FormLabel class="self-start text-xs font-bold uppercase text-muted-foreground">Email</FormLabel>
+                <FormLabel class="self-start text-xs font-bold uppercase text-muted-foreground"
+                  >Email</FormLabel
+                >
                 <FormMessage />
               </div>
               <FormControl>
@@ -134,23 +140,40 @@ const totalCost = computed(() => {
           <div v-if="trip.addOns.length === 0">
             <p class="mt-2 text-xl font-semibold text-muted-foreground">No add-ons available</p>
           </div>
-          <FormField v-else v-for="addOn in trip.addOns" :key="addOn.name" v-slot="{ value, handleChange }"
-            type="checkbox" :name="`addOns.${addOn.name}`">
-            <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4" :class="{
-              'pointer-events-none opacity-50': addOn.spotsRemaining === 0
-            }">
+          <FormField
+            v-else
+            v-for="addOn in trip.addOns"
+            :key="addOn.name"
+            v-slot="{ value, handleChange }"
+            type="checkbox"
+            :name="`addOns.${addOn.name}`"
+          >
+            <FormItem
+              class="flex flex-row items-start gap-x-3 space-y-0 py-4"
+              :class="{
+                'pointer-events-none opacity-50': addOn.spotsRemaining === 0
+              }"
+            >
               <FormControl>
-                <Checkbox :checked="value" @update:checked="handleChange" :disabled="addOn.spotsRemaining === 0" />
+                <Checkbox
+                  :checked="value"
+                  @update:checked="handleChange"
+                  :disabled="addOn.spotsRemaining === 0"
+                />
               </FormControl>
               <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold">{{ addOn.name }}
+                <FormLabel class="cursor-pointer font-bold"
+                  >{{ addOn.name }}
                   {{
                     addOn.timeEnd && addOn.timeStart
-                      ? `(${formatDate(new Date(addOn.timeStart), 'MMM DD, YYYY hh:mm A')} - ${formatDate(new
-                        Date(addOn.timeEnd), 'MMM DD, YYYY hh:mm A')})`
+                      ? `(${formatDate(new Date(addOn.timeStart), 'MMM DD, YYYY hh:mm A')} - ${formatDate(
+                          new Date(addOn.timeEnd),
+                          'MMM DD, YYYY hh:mm A'
+                        )})`
                       : ''
                   }}
-                  {{ addOn.spotsRemaining === 0 ? '[No slots remaining]' : '' }}</FormLabel>
+                  {{ addOn.spotsRemaining === 0 ? '[No slots remaining]' : '' }}</FormLabel
+                >
                 <FormDescription class="text-md font-bold">
                   Price: {{ trip.currency }} {{ addOn.cost }}
                 </FormDescription>
@@ -184,27 +207,31 @@ const totalCost = computed(() => {
             <Checkbox :checked="value" @update:checked="handleChange" />
           </FormControl>
           <div class="space-y-6 leading-none">
-            <FormLabel class="cursor-pointer">I have read and agree to TourHero's
+            <FormLabel class="cursor-pointer"
+              >I have read and agree to TourHero's
               <a class="text-[#307582] hover:underline" href="#">Terms of Use</a>,
-              <a class="text-[#307582] hover:underline" href="#">Privacy Policy</a>,
-              Cancellation Policy and Payment Plan. I also agree to
+              <a class="text-[#307582] hover:underline" href="#">Privacy Policy</a>, Cancellation
+              Policy and Payment Plan. I also agree to
               <a class="text-[#307582] hover:underline" href="#">VAOVA Travel's Terms of Use</a>.*
             </FormLabel>
             <FormMessage />
           </div>
         </FormItem>
       </FormField>
-      <Button type="submit" class="ml-auto flex items-center gap-2 bg-[#D50037] hover:bg-[#da4050]"
-        :disabled="isSubmitting || isSuccess">
-        <div v-if="isSubmitting" class="flex gap-2 items-center">
+      <Button
+        type="submit"
+        class="ml-auto flex items-center gap-2 bg-[#D50037] hover:bg-[#da4050]"
+        :disabled="isSubmitting || isSuccess"
+      >
+        <div v-if="isSubmitting" class="flex items-center gap-2">
           <LoaderCircle class="animate-spin stroke-white" />
           <span>Loading...</span>
         </div>
-        <div v-else-if="isSuccess" class="flex gap-2 items-center">
+        <div v-else-if="isSuccess" class="flex items-center gap-2">
           <CircleCheckBig class="h-5 w-5" />
           <span>Success</span>
         </div>
-        <div v-else class="flex gap-2 items-center">
+        <div v-else class="flex items-center gap-2">
           <LockIcon class="h-5 w-5 stroke-1" />
           <span>Confirm and pay</span>
         </div>
@@ -276,13 +303,13 @@ const totalCost = computed(() => {
         <AlertDialogTitle>Successfully reserved your slot!</AlertDialogTitle>
         <AlertDialogDescription>
           <p>Congratulations! You have successfully reserved your personal slot for the trip!</p>
-          <pre class='mt-2 rounded-md bg-slate-950 p-4 w-full whitespace-pre-line'>
+          <pre class="mt-2 w-full whitespace-pre-line rounded-md bg-slate-950 p-4">
             <code class="text-white whitespace-pre">{{ JSON.stringify(values, null, 2) }}</code>
           </pre>
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <AlertDialogAction>
+        <AlertDialogAction as-child>
           <RouterLink to="/">Go back home</RouterLink>
         </AlertDialogAction>
       </AlertDialogFooter>
