@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Trip } from '@/lib/api/trips'
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 
 const { trip } = defineProps<{ trip: Trip }>()
 </script>
