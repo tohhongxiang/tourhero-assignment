@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { Trip } from '@/lib/api/trips'
+import { RouterLink } from 'vue-router';
 
 const { trip } = defineProps<{ trip: Trip }>()
 </script>
 
 <template>
-  <RouterLink :to="`/trips/${trip.id}`">
+  <RouterLink :to="{ path: `/trips/${trip.id}`, state: { title: trip.name } }">
     <div class="flex h-full flex-col overflow-hidden rounded-md border border-gray-600/10">
       <img :src="trip.coverImage" class="h-64 w-full object-cover" />
       <div class="flex h-full flex-col justify-between p-4">

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CheckoutView from '../views/CheckoutView.vue'
 import TripView from '../views/TripView.vue'
+import { getTrip } from '@/lib/api/trips'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,34 +13,48 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    },
-    {
       path: '/trips/:tripId',
-      name: 'specific-trip',
+      name: 'Trip',
       children: [
         {
           path: '',
-          name: 'specific-trip-details',
+          name: 'Trip Details',
           component: TripView
         },
         {
           path: 'checkout',
-          name: 'specific-trip-checkout',
+          name: 'Checkout',
           component: CheckoutView
         }
       ]
     }
   ]
+})
+
+const appName = 'TourHero (THX)'
+
+const createAppTitle = (x: string) => (x ? `${x} - ${appName}` : appName)
+
+router.beforeEach(async (to, from, next) => {
+  if (to.params.tripId) {
+    // looks like a code smell
+    const trip = await getTrip(to.params.tripId as string)
+    if (!trip) {
+      document.title = createAppTitle(`Trip not Found!`)
+    } else {
+      document.title = createAppTitle(trip.name)
+    }
+  } else if (to.name) {
+    document.title = createAppTitle(to.name.toString())
+  } else {
+    document.title = appName
+  }
+
+  next()
 })
 
 export default router
