@@ -1,3 +1,5 @@
+import { convertRawTripToTrip, type RawTrip } from './tripDTO'
+
 export type Trip = {
   id: string
   name: string
@@ -14,6 +16,7 @@ export type Trip = {
 }
 
 export type TripAddOn = {
+  id: string
   name: string
   cost: number
   spotsRemaining?: number
@@ -144,12 +147,29 @@ const trips = [
   }
 ]
 
+const API_URL = `http://localhost:5000`
 export async function getAllTrips() {
-  return Promise.resolve(trips)
+  const fetchedTrips: RawTrip[] = await fetch(`${API_URL}/trips`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((res) => res.json())
+
+  const processedTrips = fetchedTrips.map((rawTrip) => convertRawTripToTrip(rawTrip))
+  return processedTrips
 }
 
 export async function getTrip(tripId: string) {
-  return Promise.resolve(trips.find((trip) => trip.id === tripId))
+  const fetchedTrip: RawTrip = await fetch(`${API_URL}/trips/${tripId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((res) => res.json())
+
+  const processedTrip = convertRawTripToTrip(fetchedTrip)
+  return processedTrip
 }
 
 export async function bookTrip(data: any) {

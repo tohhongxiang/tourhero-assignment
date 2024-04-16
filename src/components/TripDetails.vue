@@ -20,7 +20,9 @@ const tripDuration = computed(() =>
     <h1 class="text-4xl font-bold">{{ tripDetails.name }}</h1>
     <img :src="tripDetails.coverImage" />
     <div class="flex flex-col gap-8 md:flex-row">
-      <div class="grid w-full grid-cols-1 gap-4 rounded-md border p-8 sm:grid-cols-2 md:grid-cols-3">
+      <div
+        class="grid w-full grid-cols-1 gap-4 rounded-md border p-8 sm:grid-cols-2 md:grid-cols-3"
+      >
         <div>
           <p class="text-sm font-semibold uppercase text-muted-foreground">Duration</p>
           <p>{{ tripDetails.durationNights + 1 }} days, {{ tripDetails.durationNights }} nights</p>
@@ -49,7 +51,9 @@ const tripDuration = computed(() =>
             <span class="text-lg font-semibold text-muted-foreground">/ person</span>
           </p>
           <Button as-child>
-            <RouterLink :to="`/trips/${props.tripId}/checkout`" class="bg-[#d50037]">Reserve your spot!</RouterLink>
+            <RouterLink :to="`/trips/${props.tripId}/checkout`" class="bg-[#d50037]"
+              >Reserve your spot!</RouterLink
+            >
           </Button>
         </div>
       </div>
@@ -58,7 +62,7 @@ const tripDuration = computed(() =>
       <div class="w-full rounded-md border p-6">
         <p class="font-semibold">{{ tripDetails.description }}</p>
       </div>
-      <div class="rounded-md border p-6">
+      <div class="shrink-0 rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
           <img src="@/assets/icons/PaperWithCheck.svg" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>

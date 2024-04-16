@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CheckoutView from '../views/CheckoutView.vue'
 import TripView from '../views/TripView.vue'
 import { getTrip } from '@/lib/api/trips'
+import Playground from '@/views/Playground.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: HomeView
+    },
+    {
+      path: '/playground',
+      name: 'Playground',
+      component: Playground
     },
     {
       path: '/trips/:tripId',
