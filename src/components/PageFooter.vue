@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <footer class="border-t border-gray-600/10">
+  <footer class="border-t">
     <div
       class="mx-auto flex w-full flex-col flex-wrap justify-between gap-8 p-8 sm:w-2/3 sm:flex-row"
     >
@@ -55,7 +55,7 @@
         </ul>
       </div>
     </div>
-    <div class="mx-auto w-full border-t border-gray-600/10 px-8 pb-8 pt-4 sm:w-2/3 sm:px-0">
+    <div class="mx-auto w-full border-t px-8 pb-8 pt-4 sm:w-2/3 sm:px-0">
       <p class="text-muted-foreground">© 2024 Toh Hong Xiang</p>
     </div>
   </footer>

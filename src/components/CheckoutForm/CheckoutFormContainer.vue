@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { toTypedSchema } from '@vee-validate/zod'
-import { useForm } from 'vee-validate'
+import {
+AlertDialog,
+AlertDialogAction,
+AlertDialogContent,
+AlertDialogDescription,
+AlertDialogFooter,
+AlertDialogHeader,
+AlertDialogTitle
+} from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
+FormControl,
+FormDescription,
+FormField,
+FormItem,
+FormLabel,
+FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Umbrella, CircleCheckBig, LockIcon, LoaderCircle } from 'lucide-vue-next'
 import { bookTrip, type Trip } from '@/lib/api/trips'
 import formatTripDuration from '@/lib/formatTripDuration'
-import generateCheckoutSchema from './generateCheckoutSchema'
+import { toTypedSchema } from '@vee-validate/zod'
 import { formatDate } from '@vueuse/core'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle
-} from '@/components/ui/alert-dialog'
+import { CircleCheckBig, LoaderCircle, LockIcon, Umbrella } from 'lucide-vue-next'
+import { useForm } from 'vee-validate'
+import { computed, ref } from 'vue'
+import generateCheckoutSchema from './generateCheckoutSchema'
 
 const { trip } = defineProps<{ trip: Trip }>()
 
@@ -84,7 +84,7 @@ const totalCost = computed(() => {
   <h2 class="mb-8 text-2xl font-bold">Checkout</h2>
   <form class="flex w-full flex-col-reverse gap-4 sm:flex-row" @submit.prevent="onSubmit">
     <div class="flex w-full flex-col gap-4">
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <h4 class="mb-4 text-2xl font-semibold text-primary">Guest details</h4>
         <div class="flex flex-col justify-between gap-4 lg:flex-row">
           <FormField v-slot="{ componentField }" name="name">
@@ -134,7 +134,7 @@ const totalCost = computed(() => {
           </FormField>
         </div>
       </div>
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <h4 class="text-2xl font-semibold text-primary">Available add-on(s)</h4>
         <div class="flex flex-col gap-4">
           <div v-if="trip.addOns.length === 0">
@@ -183,7 +183,7 @@ const totalCost = computed(() => {
           </FormField>
         </div>
       </div>
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <h4 class="mb-4 text-2xl font-semibold text-primary">Price Breakdown</h4>
         <ul class="flex flex-col gap-4">
           <li class="flex justify-between">
@@ -194,7 +194,7 @@ const totalCost = computed(() => {
             <p>Add-ons</p>
             <p>{{ trip.currency }} {{ selectedAddOnsCost }}</p>
           </li>
-          <li class="border-t border-gray-600/10"></li>
+          <li class="border-t"></li>
           <li class="flex justify-between font-bold">
             <p>Total due</p>
             <p class="text-lg">{{ trip.currency }} {{ totalCost }}</p>
@@ -220,7 +220,7 @@ const totalCost = computed(() => {
       </FormField>
       <Button
         type="submit"
-        class="ml-auto flex items-center gap-2 bg-[#D50037] hover:bg-[#da4050]"
+        class="ml-auto flex items-center gap-2 bg-red-500 hover:bg-red-600"
         :disabled="isSubmitting || isSuccess"
       >
         <div v-if="isSubmitting" class="flex items-center gap-2">
@@ -238,7 +238,7 @@ const totalCost = computed(() => {
       </Button>
     </div>
     <div class="flex flex-col gap-4 sm:w-96 lg:w-1/3">
-      <div class="overflow-hidden rounded-md border border-gray-600/10">
+      <div class="overflow-hidden rounded-md border">
         <img :src="trip.coverImage" />
         <div class="p-6">
           <h4 class="mb-6 text-2xl font-semibold text-primary">Summary</h4>
@@ -256,24 +256,24 @@ const totalCost = computed(() => {
             <p class="font-semibold">{{ trip.currency }} {{ selectedAddOnsCost }}</p>
           </div>
 
-          <div class="my-6 border-b border-gray-600/10" />
+          <div class="my-6 border-b" />
 
           <p class="mt-4 text-xs font-bold uppercase text-muted-foreground">Current Payment</p>
           <p class="text-4xl font-bold text-primary">{{ trip.currency }} {{ totalCost }}</p>
         </div>
       </div>
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
           <img src="@/assets/icons/PaperWithCheck.svg" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">
           <li v-for="(item, index) in trip.included" :key="index" class="flex gap-2">
-            <CircleCheckBig class="shrink-0 stroke-green-800" />{{ item }}
+            <CircleCheckBig class="shrink-0 stroke-green-700" />{{ item }}
           </li>
         </ul>
       </div>
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
           <Umbrella class="stroke-primary" />
           <h4 class="text-2xl font-semibold text-primary">Cancellation policy</h4>

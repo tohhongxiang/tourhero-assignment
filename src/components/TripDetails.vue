@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from '@/components/ui/button'
-import formatTripDuration from '@/lib/formatTripDuration'
 import { getTrip } from '@/lib/api/trips'
+import formatTripDuration from '@/lib/formatTripDuration'
 import { CircleCheckBig, CircleDollarSign } from 'lucide-vue-next'
 import { computed } from 'vue'
 
@@ -20,7 +20,7 @@ const tripDuration = computed(() =>
     <h1 class="text-4xl font-bold">{{ tripDetails.name }}</h1>
     <img :src="tripDetails.coverImage" />
     <div class="flex flex-col gap-8 md:flex-row">
-      <div class="grid w-full grid-cols-1 gap-4 rounded-md border border-gray-600/10 p-8 sm:grid-cols-2 md:grid-cols-3">
+      <div class="grid w-full grid-cols-1 gap-4 rounded-md border p-8 sm:grid-cols-2 md:grid-cols-3">
         <div>
           <p class="text-sm font-semibold uppercase text-muted-foreground">Duration</p>
           <p>{{ tripDetails.durationNights + 1 }} days, {{ tripDetails.durationNights }} nights</p>
@@ -38,7 +38,7 @@ const tripDuration = computed(() =>
           <p>{{ tripDetails.groupSize }}</p>
         </div>
       </div>
-      <div class="w-full rounded-md border border-gray-600/10 p-6 md:w-1/3">
+      <div class="w-full rounded-md border p-6 md:w-1/3">
         <div class="mb-4 flex items-center gap-2">
           <CircleDollarSign class="stroke-1 text-primary" />
           <h2 class="text-2xl font-semibold text-primary">Tour Price</h2>
@@ -55,17 +55,17 @@ const tripDuration = computed(() =>
       </div>
     </div>
     <div class="flex flex-col gap-8 md:flex-row">
-      <div class="w-full rounded-md border border-gray-600/10 p-6">
+      <div class="w-full rounded-md border p-6">
         <p class="font-semibold">{{ tripDetails.description }}</p>
       </div>
-      <div class="rounded-md border border-gray-600/10 p-6">
+      <div class="rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
           <img src="@/assets/icons/PaperWithCheck.svg" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">
           <li v-for="(item, index) in tripDetails.included" :key="index" class="flex gap-2">
-            <CircleCheckBig class="shrink-0 stroke-green-800" />{{ item }}
+            <CircleCheckBig class="shrink-0 stroke-green-700" />{{ item }}
           </li>
         </ul>
       </div>
