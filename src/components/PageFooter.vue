@@ -28,28 +28,32 @@
         <p class="mb-4 text-sm font-bold uppercase text-muted-foreground">Follow Us</p>
         <ul class="flex flex-row flex-wrap items-center gap-8">
           <li>
-            <a href="#" class="cursor-pointer">
-              <img src="@/assets/icons/Instagram.svg" width="24" height="24" />
+            <a href="#" class="cursor-pointer" aria-label="Tourhero's Instagram">
+              <img src="@/assets/icons/Instagram.svg" alt="Instagram logo" width="24" height="24" />
             </a>
           </li>
           <li>
-            <a href="#" class="cursor-pointer">
-              <img src="@/assets/icons/Facebook.svg" width="24" height="24" />
+            <a href="#" class="cursor-pointer" aria-label="Tourhero's Facebook">
+              <img src="@/assets/icons/Facebook.svg" alt="Facebook Logo" width="24" height="24" />
             </a>
           </li>
           <li>
-            <a href="#" class="cursor-pointer">
-              <img src="@/assets/icons/LinkedIn.svg" width="24" height="24" />
+            <a href="#" class="cursor-pointer" aria-label="Tourhero's LinkedIn">
+              <img src="@/assets/icons/LinkedIn.svg" alt="LinkedIn Logo" width="24" height="24" />
             </a>
           </li>
           <li>
-            <a href="#" class="cursor-pointer">
-              <img src="@/assets/icons/X.svg" width="24" height="24" />
+            <a
+              href="#"
+              class="cursor-pointer"
+              aria-label="Tourhero's X (formerly known as Twitter)"
+            >
+              <img src="@/assets/icons/X.svg" alt="X logo" width="24" height="24" />
             </a>
           </li>
           <li>
-            <a href="#" class="cursor-pointer">
-              <img src="@/assets/icons/Youtube.svg" width="24" height="24" />
+            <a href="#" class="cursor-pointer" aria-label="Tourhero's Youtube">
+              <img src="@/assets/icons/Youtube.svg" alt="Youtube logo" width="24" height="24" />
             </a>
           </li>
         </ul>

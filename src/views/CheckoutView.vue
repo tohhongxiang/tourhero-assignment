@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CheckoutForm from '@/components/CheckoutForm/index.vue'
-import type LoadingIndicator from '@/components/LoadingIndicator.vue'
+import LoadingIndicator from '@/components/LoadingIndicator.vue'
 import { useRoute } from 'vue-router'
 
 const { params } = useRoute()

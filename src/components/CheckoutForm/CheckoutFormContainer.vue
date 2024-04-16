@@ -159,10 +159,11 @@ const totalCost = computed(() => {
                   :checked="value"
                   @update:checked="handleChange"
                   :disabled="addOn.spotsRemaining === 0"
+                  :id="addOn.id"
                 />
               </FormControl>
               <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold"
+                <FormLabel class="cursor-pointer font-bold" :for="addOn.id"
                   >{{ addOn.name }}
                   {{
                     addOn.timeEnd && addOn.timeStart
@@ -204,10 +205,14 @@ const totalCost = computed(() => {
       <FormField v-slot="{ value, handleChange }" type="checkbox" name="acceptTermsAndConditions">
         <FormItem class="flex flex-row items-start gap-x-3 space-y-0 py-4">
           <FormControl>
-            <Checkbox :checked="value" @update:checked="handleChange" />
+            <Checkbox
+              :checked="value"
+              @update:checked="handleChange"
+              id="agreeToTermsAndConditions"
+            />
           </FormControl>
           <div class="space-y-6 leading-none">
-            <FormLabel class="cursor-pointer"
+            <FormLabel class="cursor-pointer" for="agreeToTermsAndConditions"
               >I have read and agree to TourHero's
               <a class="text-[#307582] hover:underline" href="#">Terms of Use</a>,
               <a class="text-[#307582] hover:underline" href="#">Privacy Policy</a>, Cancellation
@@ -220,7 +225,7 @@ const totalCost = computed(() => {
       </FormField>
       <Button
         type="submit"
-        class="ml-auto flex items-center gap-2 bg-red-500 hover:bg-red-600"
+        class="ml-auto flex items-center gap-2 bg-red-600 hover:bg-red-700"
         :disabled="isSubmitting || isSuccess"
       >
         <div v-if="isSubmitting" class="flex items-center gap-2">
@@ -239,7 +244,7 @@ const totalCost = computed(() => {
     </div>
     <div class="flex flex-col gap-4 sm:w-96 lg:w-1/3">
       <div class="overflow-hidden rounded-md border">
-        <img :src="trip.coverImage" />
+        <img :src="trip.coverImage" alt="Cover image" />
         <div class="p-6">
           <h4 class="mb-6 text-2xl font-semibold text-primary">Summary</h4>
           <p class="text-sm font-bold uppercase text-muted-foreground">
@@ -264,7 +269,7 @@ const totalCost = computed(() => {
       </div>
       <div class="rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
-          <img src="@/assets/icons/PaperWithCheck.svg" />
+          <img src="@/assets/icons/PaperWithCheck.svg" alt="" />
           <h4 class="text-2xl font-semibold text-primary">Included</h4>
         </div>
         <ul class="flex flex-col gap-4">

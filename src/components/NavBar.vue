@@ -12,8 +12,8 @@ import { Menu } from 'lucide-vue-next'
 
 <template>
   <nav class="flex items-center justify-between px-4 py-4 shadow-sm sm:px-16 lg:px-32">
-    <RouterLink to="/">
-      <img src="@/assets/logo.png" width="128" height="32" />
+    <RouterLink to="/" aria-label="Go to home page">
+      <img src="@/assets/logo.png" alt="Tourhero logo" width="128" height="32" />
     </RouterLink>
     <div>
       <div class="hidden gap-2 sm:flex">
@@ -40,8 +40,8 @@ import { Menu } from 'lucide-vue-next'
             <RouterLink
               to="/sign-in"
               class="w-full rounded-md px-4 py-2 text-lg font-bold hover:bg-muted-foreground/10"
-              >Sign in / Sign up</RouterLink
-            >
+              >Sign in / Sign up
+            </RouterLink>
             <RouterLink
               to="/explore"
               class="w-full rounded-md px-4 py-2 text-lg font-bold hover:bg-muted-foreground/10"

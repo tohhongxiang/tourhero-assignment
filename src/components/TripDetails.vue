@@ -18,7 +18,7 @@ const tripDuration = computed(() =>
   </div>
   <div v-else class="flex flex-col gap-8">
     <h1 class="text-4xl font-bold">{{ tripDetails.name }}</h1>
-    <img :src="tripDetails.coverImage" />
+    <img :src="tripDetails.coverImage" alt="" />
     <div class="flex flex-col gap-8 md:flex-row">
       <div
         class="grid w-full grid-cols-1 gap-4 rounded-md border p-8 sm:grid-cols-2 md:grid-cols-3"
@@ -64,8 +64,8 @@ const tripDuration = computed(() =>
       </div>
       <div class="shrink-0 rounded-md border p-6">
         <div class="mb-4 flex flex-row items-center gap-2">
-          <img src="@/assets/icons/PaperWithCheck.svg" />
-          <h4 class="text-2xl font-semibold text-primary">Included</h4>
+          <img src="@/assets/icons/PaperWithCheck.svg" alt="" />
+          <h2 class="text-2xl font-semibold text-primary">Included</h2>
         </div>
         <ul class="flex flex-col gap-4">
           <li v-for="(item, index) in tripDetails.included" :key="index" class="flex gap-2">
