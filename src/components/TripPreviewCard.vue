@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Trip } from '@/lib/api/trips'
 import { RouterLink } from 'vue-router'
+import { formatDate } from '@vueuse/core'
 
 const { trip } = defineProps<{ trip: Trip }>()
 </script>
@@ -21,7 +22,8 @@ const { trip } = defineProps<{ trip: Trip }>()
             {{ trip.currency }} {{ trip.cost }}
           </p>
           <p class="text-sm font-semibold uppercase text-muted-foreground">
-            {{ trip.startDate }} - {{ trip.durationNights }} nights
+            {{ formatDate(new Date(trip.startDate), 'MMM DD, YYYY') }} -
+            {{ trip.durationNights }} nights
           </p>
         </div>
       </div>

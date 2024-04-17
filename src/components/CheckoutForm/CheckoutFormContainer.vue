@@ -159,11 +159,10 @@ const totalCost = computed(() => {
                   :checked="value"
                   @update:checked="handleChange"
                   :disabled="addOn.spotsRemaining === 0"
-                  :id="addOn.id"
                 />
               </FormControl>
               <div class="space-y-6 leading-none">
-                <FormLabel class="cursor-pointer font-bold" :for="addOn.id"
+                <FormLabel class="cursor-pointer font-bold"
                   >{{ addOn.name }}
                   {{
                     addOn.timeEnd && addOn.timeStart
