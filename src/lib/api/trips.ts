@@ -1,4 +1,4 @@
-import { convertRawTripToTrip, type RawTrip } from './tripDTO'
+import { convertRawTripToTrip, type RawTrip, type RawTripAddOn } from './tripDTO'
 
 export type Trip = {
   id: string
@@ -172,9 +172,17 @@ export async function getTrip(tripId: string) {
   return processedTrip
 }
 
-export async function bookTrip(data: any) {
-  await new Promise((r) => setTimeout(r, 2000))
-  console.log('Submitted', data)
+export async function bookAddOn(addOn: TripAddOn) {
+  try {
+    await fetch(`${API_URL}/add_ons/${addOn.id}/book`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => res.json())
 
-  return { success: true }
+    return { success: true } // todo: Handle API error better
+  } catch (e) {
+    return { success: false }
+  }
 }

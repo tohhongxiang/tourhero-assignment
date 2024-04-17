@@ -19,7 +19,7 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { bookTrip, type Trip } from '@/lib/api/trips'
+import { bookAddOn, type Trip } from '@/lib/api/trips'
 import formatTripDuration from '@/lib/formatTripDuration'
 import { toTypedSchema } from '@vee-validate/zod'
 import { formatDate } from '@vueuse/core'
@@ -46,14 +46,18 @@ const isSuccess = ref(false)
 const onSubmit = handleSubmit(async (values) => {
   isSubmitting.value = true
 
-  const response = await bookTrip(values)
+  const bookedAddOnNames = Object.keys(values.addOns ?? {})
+  const bookedAddOns = trip.addOns.filter((addOn) => bookedAddOnNames.includes(addOn.name))
 
-  if (response.success) {
+  const response = await Promise.all(bookedAddOns.map((addOn) => bookAddOn(addOn)))
+
+  if (response.every((res) => res.success)) {
     isSuccess.value = true
   } else {
     console.error('An error has occurred in submitting the form')
   }
 
+  isSuccess.value = true
   isSubmitting.value = false
 })
 
